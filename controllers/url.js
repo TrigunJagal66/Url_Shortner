@@ -16,13 +16,14 @@ async function handleGenerateNewShortURL(req, res) {
         visitHistory: []
     });
 
-    // Fetch all URLs including the newly created one
+    
     const allurls = await URL.find({});
 
-    // Pass both the new short ID and all URLs to the template
+
     return res.render('home', {
         id: shortID,
-        urls: allurls, // Pass the list of URLs to the template
+        urls: allurls,
+        host: req.headers.host,
     });
 }
 
@@ -41,6 +42,6 @@ async function handleGetAnalytics(req, res) {
 }
 
 module.exports = {
-    handleGenerateNewShortURL,
-    handleGetAnalytics, // Make sure this is correctly exported
+    handleGenerateNewShortURL, 
+    handleGetAnalytics,        
 };

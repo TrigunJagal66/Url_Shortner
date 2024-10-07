@@ -1,13 +1,16 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router();  
 const URL = require('../models/url'); 
 
 router.get('/', async (req, res) => {
     try {
         const allurls = await URL.find({}); 
+        
+        
         return res.render('home', {
-            id: null,
-            urls: allurls, 
+            id: null,        
+            urls: allurls,   
+            host: req.headers.host,  
         });
     } catch (error) {
         console.error('Error fetching URLs:', error);
@@ -15,4 +18,4 @@ router.get('/', async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = router; 
